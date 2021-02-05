@@ -1,0 +1,4 @@
+savebin build\main_copy.bin, 0x00, 0x4000
+r
+g
+q
