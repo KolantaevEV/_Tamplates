@@ -13,5 +13,6 @@
 #include "interrupts.h"
 
 main_const transmit_check(uint8_t *data_in, uint16_t data_in_size, uint8_t *data_target, uint16_t data_target_size);
+void timer_restart(char *TIM_x);
 
 #endif

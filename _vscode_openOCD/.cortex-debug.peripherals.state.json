@@ -1,1 +1,1 @@
-[]
+[{"node":"GPIOB","expanded":true,"format":0,"pinned":false},{"node":"GPIOB.IDR","expanded":true,"format":0},{"node":"TIM2","expanded":true,"format":0,"pinned":false},{"node":"TIM2.SR","expanded":true,"format":0},{"node":"TIM2.CNT","expanded":false,"format":2},{"node":"TIM2.PSC","expanded":false,"format":2},{"node":"TIM2.ARR","expanded":false,"format":2},{"node":"TIM3","expanded":true,"format":0,"pinned":false}]

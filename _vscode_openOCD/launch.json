@@ -12,7 +12,7 @@
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
-            "serverpath": "C:/Program Files/OpenOCD-20200729-0.10.0/bin/openocd.exe",
+            "serverpath": "C:/VS_soft/OpenOCD-20201228-0.10.0/bin/openocd.exe",
             "device": "stm32f1x",
 //            "interface": "swd"
 //            "ipAddress": "",

@@ -39,9 +39,9 @@ task_state_const Task_Handler(Uword *word_rcv, Uword *word_tr, Uword *word_msg)
                                 task_cmd = TASK_ERROR;
                             break;
 
-                        case SET_NO_TASK:                    
+                        default:                    
                                 task_cmd = NO_TASK;
-                            break;
+                            break;                        
                     }
                 break;
 
@@ -63,6 +63,7 @@ task_state_const Task_Handler(Uword *word_rcv, Uword *word_tr, Uword *word_msg)
 
                         case STARTED:
                                 GPIOC->BSRR = GPIO_BSRR_BR13;
+                                GPIOB->BSRR = GPIO_BSRR_BR5;
                                 Uword_clear(word_tr);
                                 memcpy(word_tr->data, "AT+CMGS=\"+79111660225\"\x0D", (word_tr->size = 23));
                                 Uword_clear(word_msg);
@@ -73,6 +74,7 @@ task_state_const Task_Handler(Uword *word_rcv, Uword *word_tr, Uword *word_msg)
 
                         case STOPPED:
                                 GPIOC->BSRR = GPIO_BSRR_BS13;
+                                GPIOB->BSRR = GPIO_BSRR_BS5;
                                 Uword_clear(word_tr);
                                 memcpy(word_tr->data, "AT+CMGS=\"+79111660225\"\x0D", (word_tr->size = 23));
                                 Uword_clear(word_msg);
@@ -85,10 +87,14 @@ task_state_const Task_Handler(Uword *word_rcv, Uword *word_tr, Uword *word_msg)
                                 Uword_clear(word_tr);
                                 Uword_clear(word_msg);
                                 Uword_clear(word_rcv);
+                                sms_state = CLEAR_SMS;
                                 task_cmd = TASK_ERROR;
                             break;
                         
-                        case SET_NO_TASK:
+                        default:
+                                Uword_clear(word_tr);
+                                Uword_clear(word_msg);
+                                Uword_clear(word_rcv);
                                 sms_state = CLEAR_SMS;
                                 task_cmd = NO_TASK;
                             break;
@@ -109,9 +115,9 @@ task_state_const Task_Handler(Uword *word_rcv, Uword *word_tr, Uword *word_msg)
                                 task_cmd = TASK_DONE;
                             break;
                         
-                        case SET_NO_TASK:    
-                                    task_cmd = NO_TASK;
-                                break;
+                        default:
+                                task_cmd = NO_TASK;
+                            break;
                     }
                 break;
 
@@ -147,19 +153,15 @@ main_const WordFind(uint8_t *strmain, uint16_t strmain_size, uint8_t *strfind, u
 
 task_state_const Get_Task_Type(Uword *task)
 {
-    task_state_const task_type = TASK_START;
+    task_state_const task_type = NO_TASK;
 
     if (task->size > 0)
     {
-        while(task_type == TASK_START) {
-            if (WordFind(task->data, task->size, (uint8_t*)"AT+CMGS", 7) == TRUE) {task_type = AT_CMGS; break;}
-            if (WordFind(task->data, task->size, (uint8_t*)"CMTI", 4) == TRUE) {task_type = CMTI; break;}
-            if (WordFind(task->data, task->size, (uint8_t*)"AT+CMGR", 7) == TRUE) {task_type = AT_CMGR; break;}
-            if (WordFind(task->data, task->size, (uint8_t*)"AT+CMGDA", 7) == TRUE) {task_type = AT_CMGDA; break;}
-            task_type = NO_TASK;
-        }
+        if (WordFind(task->data, task->size, (uint8_t*)"AT+CMGS", 7) == TRUE) {task_type = AT_CMGS; return task_type;}
+        if (WordFind(task->data, task->size, (uint8_t*)"CMTI", 4) == TRUE) {task_type = CMTI; return task_type;}
+        if (WordFind(task->data, task->size, (uint8_t*)"AT+CMGR", 7) == TRUE) {task_type = AT_CMGR; return task_type;}
+        if (WordFind(task->data, task->size, (uint8_t*)"AT+CMGDA", 7) == TRUE) {task_type = AT_CMGDA; return task_type;}
     }
-    else task_type = NO_TASK;
 
     return task_type;
 }

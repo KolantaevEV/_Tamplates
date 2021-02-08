@@ -2,6 +2,8 @@
 
 extern Rbuff buff_uart_1;
 extern Rbuff buff_uart_2;
+extern uint8_t timer_TIM2;
+extern uint8_t timer_TIM3;
 
 void USART1_IRQHandler(void)    //ECHO MODE 
 {
@@ -23,14 +25,18 @@ void USART2_IRQHandler(void)
 
 void TIM2_IRQHandler(void)
 {
-    TIM2->CR1 &= ~TIM_CR1_CEN;
-    TIM2->SR &= ~TIM_SR_UIF;
-    TIM2->CNT = 0;
+    if (TIM2->SR & TIM_SR_UIF) {
+        TIM2->SR = ~TIM_SR_UIF;
+        if (timer_TIM2 < 3000) timer_TIM2++;
+        else timer_TIM2 = 0;
+    }
 }
 
 void TIM3_IRQHandler(void)
 {
-    TIM3->CR1 &= ~TIM_CR1_CEN;
-    TIM3->SR &= ~TIM_SR_UIF;
-    TIM3->CNT = 0;
+    if (TIM3->SR & TIM_SR_UIF) {
+        TIM3->SR = ~TIM_SR_UIF;
+        if (timer_TIM3 < 3000) timer_TIM3++;
+        else timer_TIM3 = 0;
+    }
 }

@@ -7,11 +7,13 @@ typedef enum{
     FALSE = 0,
     TRUE = 1,
     END = 2,
-    USART_RESPONSE_TIME = 10000U, //ms
-    GPIO_RESPONSE_TIME = 500U //ms
+    START_RESPONSE_TIME = 600U, //tick = 0,1s
+    USART_RESPONSE_TIME = 50U, //tick = 0,1s
+    GPIO_RESPONSE_TIME = 5U //tick = 0,1s
 } main_const;
 
 typedef enum{
+    REBOOT,
     START,
     TIMER_START,
     RECEIVE,
