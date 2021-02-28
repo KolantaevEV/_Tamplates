@@ -2,7 +2,7 @@
 #define FIFO
 #define FIFO_SIZE 128
 
-#include <stdio.h>
+#include <stdint.h>
 
 typedef struct {
     uint8_t data[FIFO_SIZE];
