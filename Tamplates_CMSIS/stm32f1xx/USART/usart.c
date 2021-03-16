@@ -44,7 +44,7 @@ void USART2_init(void)
 
 void USART_Send_byte(USART_TypeDef *USARTx, uint8_t byte)
 {
-    while(!(USARTx->SR & USART_SR_TC));
+    while(!(USARTx->SR & USART_SR_TXE));
     USARTx->DR = byte;
 }
 
