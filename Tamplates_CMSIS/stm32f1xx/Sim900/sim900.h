@@ -1,6 +1,6 @@
-#ifndef SIM900
-#define SIM900
+#ifndef LIB_SIM900
+#define LIB_SIM900
 
 #include <stdint.h>
 
-#endif
+#endif  /*LIB_SIM900*/

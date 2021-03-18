@@ -4,7 +4,7 @@
 #define DMA16_size 128
 #define DMA32_size 128
 
-#include "stm32f1xx.h"
+#include "stm32f4xx.h"
 #include "string.h"
 
 typedef struct {
