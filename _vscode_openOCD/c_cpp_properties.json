@@ -6,9 +6,7 @@
             "includePath": [
                 "C:/VS_soft/gcc-arm-none-eabi/**",
 
-                "${workspaceRoot}/**",
-                "${workspaceRoot}/inc/**",
-                "${workspaceRoot}/CMSIS/inc/**"
+                "${workspaceRoot}/**"
             ],
             "defines": [
                 "STM32F103xB",

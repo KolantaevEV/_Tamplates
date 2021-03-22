@@ -1,6 +1,6 @@
 #ifndef INC_INTERRUPTS
 #define INC_INTERRUPTS
 
+void IRQ_init(void);
 
-
-#endif
+#endif  /*INC_INTERRUPTS*/

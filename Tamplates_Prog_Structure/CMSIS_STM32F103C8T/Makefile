@@ -42,7 +42,7 @@ cmsis/src/system_stm32f1xx.c \
 
 # ASM sources
 ASM_SOURCES =  \
-startup/startup_stm32f103xb.s
+startup_stm32f103xb.s
 
 #######################################
 # binaries

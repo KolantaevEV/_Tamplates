@@ -1,6 +1,6 @@
 #include "usart.h"
 
-void USART_init(void)
+void USART1_init(void)
 {
 //--------------RCC_enable----------------------------
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN; //USART1 on PB6-TX and PB7-RX
@@ -22,9 +22,27 @@ void USART_init(void)
     GPIOB->PUPDR |= GPIO_PUPDR_PUPD7_0; //pull_up
     GPIOB->AFR[0] |= GPIO_AFRL_AFSEL7_0 | GPIO_AFRL_AFSEL7_1 | GPIO_AFRL_AFSEL7_2; // AF7 - USART1RX
 //--------------USART_config--------------------------
-    USART1->BRR = 0x222E; //84Mhz 115200baud if over8 = 0
+    USART1->BRR = 0x2D9; //84Mhz 115200baud if over8 = 0
+    USART1->CR1 &= ~USART_CR1_OVER8; //Oversampling mode
+    USART1->CR1 |= USART_CR1_M; //Word length
+    USART1->CR1 &= ~USART_CR1_WAKE;  //Wake up method
+    USART1->CR1 |= USART_CR1_PCE;   //Parity control
+    USART1->CR1 &= ~USART_CR1_PS;    //Parity type
+    USART1->CR1 &= ~USART_CR1_RWU; //Active or mute mode
+    USART1->CR1 &= ~USART_CR1_SBK;   //Send break
+    USART1->CR3 &= ~USART_CR3_ONEBIT;   //Sample method
+    USART1->CR3 &= ~USART_CR3_CTSE; //Enable CTS flow control
+    USART1->CR3 &= ~USART_CR3_RTSE; //Enable RTS flow control
+    USART1->CR3 |= USART_CR3_DMAT; //Enable DMA TX
+    USART1->CR3 |= USART_CR3_DMAR; //Enable DMA RX
+    USART1->CR1 |= USART_CR1_PEIE;  //Enable Parity error interrupt
+    USART1->CR1 &= ~USART_CR1_TXEIE; //Enable TX empty interrupt
+    USART1->CR1 &= ~USART_CR1_TCIE;  //Enable TC interrupt
+    USART1->CR1 &= ~USART_CR1_RXNEIE;    //Enable RX data ready to read interrupt
+    USART1->CR1 |= USART_CR1_IDLEIE;    //Idle line detected interrupt
+    USART1->CR3 &= ~USART_CR3_CTSIE;    //Enable CTS interrupt
+    USART1->CR3 |= USART_CR3_EIE;   //Enable Errors interrupt in DMA
     USART1->CR1 |= USART_CR1_UE | USART_CR1_RE | USART_CR1_TE; //enable rx, tx, uart
-    USART1->CR1 |= USART_CR1_RXNEIE;
 }
 
 void USART_Send_byte(USART_TypeDef *USARTx, uint8_t byte)

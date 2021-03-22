@@ -6,13 +6,7 @@
             "includePath": [
                 "C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update/**",
 
-                "${workspaceRoot}\\inc\\**",
-                "${workspaceRoot}\\CMSIS\\inc\\**",
-                "${workspaceRoot}\\lib\\GPIO\\**",
-                "${workspaceRoot}\\lib\\RCC\\**",
-                "${workspaceRoot}\\lib\\Sim900\\**",
-                "${workspaceRoot}\\lib\\TIM\\**",
-                "${workspaceRoot}\\lib\\USART\\**"
+                "${workspaceRoot}/inc/**"
             ],
             "defines": [
                 "STM32F103xB",
