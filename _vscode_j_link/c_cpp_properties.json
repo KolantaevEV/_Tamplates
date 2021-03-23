@@ -2,11 +2,11 @@
     "configurations": [
         {
             "name": "arm_c_cpp_properties",
-            "compilerPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update/bin/arm-none-eabi-gcc.exe",
+            "compilerPath": "C:/VS_Tools/gcc_arm/bin/arm-none-eabi-gcc.exe",
             "includePath": [
-                "C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update/**",
+                "C:/VS_Tools/gcc_arm/**",
 
-                "${workspaceRoot}/inc/**"
+                "${workspaceRoot}/**"
             ],
             "defines": [
                 "STM32F103xB",

@@ -11,10 +11,11 @@
             "svdFile": "STM32F103.svd",
             "request": "launch",
             "type": "cortex-debug",
-            "serverpath": "C:/Program Files (x86)/SEGGER/JLink/JLinkGDBServerCL.exe", 
+            "serverpath": "C:/VS_Tools/J_link/JLinkGDBServerCL.exe", 
             "servertype": "jlink",
             "device": "Cortex-M3",
 			"interface": "swd",
+            "runToMain": true
 			//"ipAddress": "",
             //"serialNumber": ""
         }

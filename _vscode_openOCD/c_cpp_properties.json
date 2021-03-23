@@ -2,9 +2,9 @@
     "configurations": [
         {
             "name": "arm_c_cpp_properties",
-            "compilerPath": "C:/VS_soft/gcc-arm-none-eabi/bin/arm-none-eabi-gcc.exe",
+            "compilerPath": "C:/VS_Tools/gcc_arm/bin/arm-none-eabi-gcc.exe",
             "includePath": [
-                "C:/VS_soft/gcc-arm-none-eabi/**",
+                "C:/VS_Tools/gcc_arm/**",
 
                 "${workspaceRoot}/**"
             ],

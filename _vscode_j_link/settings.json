@@ -1,7 +1,7 @@
 {
-	"cortex-debug.armToolchainPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update/bin",
+	"cortex-debug.armToolchainPath": "C:/VS_Tools/gcc_arm/bin/",
 	"cortex-debug.enableTelemetry": false,
-	"cortex-debug.JLinkGDBServerPath": "C:/Program Files (x86)/SEGGER/JLink/JLinkGDBServerCL.exe",
+	"cortex-debug.JLinkGDBServerPath": "C:/VS_Tools/J_link/JLinkGDBServerCL.exe",
 	"files.associations": {
 		"cstdint": "c"
 	}

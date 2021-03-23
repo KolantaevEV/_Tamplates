@@ -25,7 +25,7 @@
             {
                 "label": "Make Build & Write to MCU",
                 "type": "shell",
-                "command": "make -s -j 10 all && openocd -f interface/stlink.cfg -f target/stm32f1x.cfg -c init -c \"reset halt\" -c \"flash write_image erase build/main.bin 0x08000000\" -c \"reset run\" -c \"exit\"",
+                "command": "make -s -j 10 all && JLink.exe -Device STM32F103C8 -If SWD -Speed 15000 j-link/FlashMCU.jlink",
                 "options": {
                     "cwd": "${workspaceRoot}",
                     "shell": {
@@ -63,7 +63,45 @@
             {
                 "label": "Write to Flash MCU",
                 "type": "shell",
-                "command": "openocd -f interface/stlink.cfg -f target/stm32f1x.cfg -c \"program build/main.elf verify reset exit\"",
+                "command": "JLink.exe -Device STM32F103C8 -If SWD -Speed 15000 j-link/FlashMCU.jlink",
+                "options": {
+                    "cwd": "${workspaceRoot}",
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [
+                            "/C"
+                        ]
+                    }
+                },
+                "group": {
+                    "kind": "test",
+                    "isDefault": true
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "Read Flash from MCU",
+                "type": "shell",
+                "command": "JLink.exe -Device STM32F103C8 -If SWD -Speed 15000 j-link/ReadMCU.jlink",
+                "options": {
+                    "cwd": "${workspaceRoot}",
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [
+                            "/C"
+                        ]
+                    }
+                },
+                "group": {
+                    "kind": "test",
+                    "isDefault": true
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "Erase Flash MCU",
+                "type": "shell",
+                "command": "JLink.exe -Device STM32F103C8 -If SWD -Speed 15000 j-link/EraseMCU.jlink",
                 "options": {
                     "cwd": "${workspaceRoot}",
                     "shell": {
@@ -82,7 +120,26 @@
             {
                 "label": "Reset MCU",
                 "type": "shell",
-                "command": "openocd -f interface/stlink.cfg -f target/stm32f1x.cfg -c init -c \"reset run\" -c \"exit\"",
+                "command": "JLink.exe -Device STM32F103C8 -If SWD -Speed 15000 j-link/ResetMCU.jlink",
+                "options": {
+                    "cwd": "${workspaceRoot}",
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [
+                            "/C"
+                        ]
+                    }
+                },
+                "group": {
+                    "kind": "test",
+                    "isDefault": true
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "Start GDB Server (Cortex-M4)",
+                "type": "shell",
+                "command": "start JLinkGDBServer.exe -select USB -device STM32F103C8 -if SWD -speed 15000 -ir",
                 "options": {
                     "cwd": "${workspaceRoot}",
                     "shell": {
