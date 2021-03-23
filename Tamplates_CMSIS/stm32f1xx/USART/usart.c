@@ -16,30 +16,34 @@ void USART1_init(void)
     GPIOA->CRH &= ~GPIO_CRH_MODE10;   //Pin to input
     GPIOA->BSRR = GPIO_BSRR_BS10;   //Set pull_up
 //----------------USART_config---------------
-    USART1->BRR = 0xEA6;    //clk divider
+    USART1->BRR = 0x271;    //clk divider
+    USART1->CR3 |= USART_CR3_DMAT | USART_CR3_DMAR | USART_CR3_EIE; //enable DMA
+    USART1->CR1 |= USART_CR1_M | USART_CR1_PCE; //8bit data + 1bit parity check (even)
     USART1->CR1 |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE; //enable rx, tx, uart
-    USART1->CR1 |= USART_CR1_RXNEIE; // rx interrupt enable
+    USART1->CR1 |= USART_CR1_IDLEIE | USART_CR1_PEIE; // interrupts enable
 }
 
-void USART2_init(void)
+void USART3_init(void)
 {
 //---------------RCC---------------
-    RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
-    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+    RCC->APB1ENR |= RCC_APB1ENR_USART3EN;
+    RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
     RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
 //----------------TX---------------
-    GPIOA->CRL &= ~GPIO_CRL_CNF2;   //reset CNF
-    GPIOA->CRL |= GPIO_CRL_CNF2_1;  //Pin to alt. func. push-pull
-    GPIOA->CRL |= GPIO_CRL_MODE2;   //Pin to output max speed (50MHz)
+    GPIOB->CRH &= ~GPIO_CRH_CNF10;   //reset CNF
+    GPIOB->CRH |= GPIO_CRH_CNF10_1;  //Pin to alt. func. push-pull
+    GPIOB->CRH |= GPIO_CRH_MODE10;   //Pin to output max speed (50MHz)
 //----------------RX---------------
-    GPIOA->CRL &= ~GPIO_CRL_CNF3;   //reset CNF
-    GPIOA->CRL |= GPIO_CRL_CNF3_1;  //Pin to input with pull_up
-    GPIOA->CRL &= ~GPIO_CRL_MODE3;  //Pin to input
-    GPIOA->BSRR = GPIO_BSRR_BS3;   //Set pull_up
+    GPIOB->CRH &= ~GPIO_CRH_CNF11;   //reset CNF
+    GPIOB->CRH |= GPIO_CRH_CNF11_1;  //Pin to input with pull_up
+    GPIOB->CRH &= ~GPIO_CRH_MODE11;  //Pin to input
+    GPIOB->BSRR = GPIO_BSRR_BS11;   //Set pull_up
 //----------------USART_config---------------
-    USART2->BRR = 0x753;    //clk divider
-    USART2->CR1 |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE; //enable rx, tx, uart
-    USART2->CR1 |= USART_CR1_RXNEIE; // rx interrupt enable
+    USART3->BRR = 0x138;    //clk divider
+    USART3->CR3 |= USART_CR3_DMAT | USART_CR3_DMAR | USART_CR3_EIE; //enable DMA
+    USART3->CR1 |= USART_CR1_M | USART_CR1_PCE; //8bit data + 1bit parity check (even)
+    USART3->CR1 |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE; //enable rx, tx, uart
+    USART3->CR1 |= USART_CR1_IDLEIE | USART_CR1_PEIE; // interrupts enable
 }
 
 void USART_Send_byte(USART_TypeDef *USARTx, uint8_t byte)
