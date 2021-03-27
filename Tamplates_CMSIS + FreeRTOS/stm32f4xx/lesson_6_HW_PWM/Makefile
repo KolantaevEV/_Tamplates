@@ -50,7 +50,7 @@ search_C_SOURCES := $(addsuffix /*.c,$(C_SOURCES))
 
 # ASM sources
 ASM_SOURCES =  \
-startup/startup_stm32f407xx.s
+startup_stm32f407xx.s
 
 #######################################
 # binaries
@@ -124,7 +124,7 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = j-link/STM32F407VGTx_FLASH.ld
+LDSCRIPT = STM32F407VGTx_FLASH.ld
 
 # libraries
 LIBS = -lc -lm -lnosys 
