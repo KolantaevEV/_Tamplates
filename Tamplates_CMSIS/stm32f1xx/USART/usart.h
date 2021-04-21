@@ -1,5 +1,5 @@
-#ifndef USART
-#define USART
+#ifndef LIB_USART
+#define LIB_USART
 #define UDATA_SIZE 128
 
 #include "stm32f1xx.h"
@@ -16,4 +16,4 @@ void USART_Send_byte(USART_TypeDef *USARTx, uint8_t byte);
 void USART_Send_Word(USART_TypeDef *USARTx, uint8_t *word, uint16_t size);
 void Udata_clear(Udata *word);
 
-#endif
+#endif  /*LIB_USART*/

@@ -1,8 +1,8 @@
-#ifndef lib_GPIO
-#define lib_GPIO
+#ifndef LIB_GPIO
+#define LIB_GPIO
 
 #include "stm32f4xx.h"
 
 void GPIO_init(void);
 
-#endif  /*lib_GPIO*/
+#endif  /*LIB_GPIO*/
