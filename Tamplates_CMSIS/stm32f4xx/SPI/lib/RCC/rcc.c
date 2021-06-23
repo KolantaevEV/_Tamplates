@@ -1,0 +1,57 @@
+#include "rcc.h"
+
+void RCC_init(void)
+{
+    RCC->CR |= RCC_CR_HSEON; //HSE on
+    while(!(RCC->CR & RCC_CR_HSERDY));
+
+    FLASH->ACR |= FLASH_ACR_PRFTEN | FLASH_ACR_LATENCY_6WS;
+
+// Max freq config on stm32f407vgt for 8Mhz HSE:
+    RCC->PLLCFGR |= RCC_PLLCFGR_PLLSRC_HSE; //PLL source is HSE clock
+    
+    RCC->CR &= ~RCC_CR_PLLON; //Disable PLL
+
+    RCC->PLLCFGR &= ~RCC_PLLCFGR_PLLM;
+    RCC->PLLCFGR |= RCC_PLLCFGR_PLLM_3; //Div 2
+
+    RCC->PLLCFGR &= ~RCC_PLLCFGR_PLLN;
+    RCC->PLLCFGR |= RCC_PLLCFGR_PLLN_4;
+    RCC->PLLCFGR |= RCC_PLLCFGR_PLLN_6;
+    RCC->PLLCFGR |= RCC_PLLCFGR_PLLN_8; //Mult 336
+
+    RCC->PLLCFGR &= ~RCC_PLLCFGR_PLLP; //Div 2
+
+    RCC->PLLCFGR |= RCC_PLLCFGR_PLLQ;
+    RCC->PLLCFGR &= ~RCC_PLLCFGR_PLLQ_3; //Div 7
+
+    RCC->CFGR &= ~RCC_CFGR_HPRE; //AHB Div 1
+
+    RCC->CFGR &= ~RCC_CFGR_PPRE1;
+    RCC->CFGR |= RCC_CFGR_PPRE1_DIV4; //APB 1 Div 4
+
+    RCC->CFGR &= ~RCC_CFGR_PPRE2;
+    RCC->CFGR |= RCC_CFGR_PPRE2_DIV2; //APB 2 Div 2
+
+//    SysTick->CTRL |= SysTick_CTRL_CLKSOURCE_Msk; //SysTick Div 1
+
+    RCC->CR |= RCC_CR_PLLON; //PLL on
+    while(!(RCC->CR & RCC_CR_PLLRDY));
+
+    RCC->CFGR &= ~RCC_CFGR_SW;
+    RCC->CFGR |= RCC_CFGR_SW_PLL; //Main clock source is PLL
+    while(!(RCC->CFGR & RCC_CFGR_SWS_PLL));
+
+// I2S_RCC_init
+/*  RCC->CFGR &= ~RCC_CFGR_I2SSRC; //i2s clock input set to PLLI2S
+    RCC->PLLI2SCFGR &= ~RCC_PLLI2SCFGR_PLLI2SN;
+    RCC->PLLI2SCFGR |= RCC_PLLI2SCFGR_PLLI2SN_6; 
+    RCC->PLLI2SCFGR |= RCC_PLLI2SCFGR_PLLI2SN_7; //Mult 192
+
+    RCC->PLLI2SCFGR &= ~RCC_PLLI2SCFGR_PLLI2SR;
+    RCC->PLLI2SCFGR |= RCC_PLLI2SCFGR_PLLI2SR_1; //Div 2
+    
+    RCC->CR |= RCC_CR_PLLI2SON;
+    while(!(RCC->CR & RCC_CR_PLLI2SRDY));
+*/
+}
