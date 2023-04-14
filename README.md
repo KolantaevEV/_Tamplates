@@ -16,10 +16,10 @@
 - HOST_ERASE = 0x43;
 - HOST_WRITE_MEM = 0x31;
 - HOST_GET_CHECKSUM = 0xA1;
-- HOST_GO = 0x21;  
+- HOST_GO = 0x21; <br>
 Все действия можно делать по отдельности, но перед HOST_WRITE_MEM всегда должен быть HOST_ERASE.
 
-Добавить в основную прошивку:
+Пример кода, добавить в основную прошивку:
 ```c
 #define FW_VERSION_ADDR ((uint16_t *)0x0801A802) //Адрес версии прошивки во флеше
 #define FW_VERSION_CLEARED 0xFFFFFFFF
