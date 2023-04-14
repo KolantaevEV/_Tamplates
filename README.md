@@ -12,11 +12,11 @@
 Основная прошивка должна прописывать по адресу #define FW_VERSION_ADDR ((uint16_t *)0x0801A802) версию текущей прошивки (uint32_t). Версия не может быть 0xFFFFFFFF;
 
 Предполагаемая последовательность действий над бутлоадером:
-- HOST_GET_VERSION = 0x01,
-- HOST_ERASE = 0x43,
-- HOST_WRITE_MEM = 0x31,
-- HOST_GET_CHECKSUM = 0xA1,
-- HOST_GO = 0x21,
+- HOST_GET_VERSION = 0x01;
+- HOST_ERASE = 0x43;
+- HOST_WRITE_MEM = 0x31;
+- HOST_GET_CHECKSUM = 0xA1;
+- HOST_GO = 0x21;  
 Все действия можно делать по отдельности, но перед HOST_WRITE_MEM всегда должен быть HOST_ERASE.
 
 Добавить в основную прошивку:
